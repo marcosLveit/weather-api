@@ -1,5 +1,6 @@
 import bodyParser from "body-parser";
 import express from "express";
+import { getBasicData } from './handler.js';
 
 const app = express();
 const port = process.env.PORT || 3333;
@@ -9,7 +10,8 @@ app.use(bodyParser.raw({ type: "application/vnd.custom-type" }));
 app.use(bodyParser.text({ type: "text/html" }));
 
 app.get("/", async (req, res) => {
-  res.json({ Hello: "World" });
+  let response = await getBasicData();
+  res.json(response);
 });
 
 app.listen(port, () => {
